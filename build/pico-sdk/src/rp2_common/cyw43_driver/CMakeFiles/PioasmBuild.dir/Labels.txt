@@ -1,0 +1,13 @@
+# Target labels
+ PioasmBuild
+# Source files and their labels
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/PioasmBuild
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/PioasmBuild.rule
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/CMakeFiles/PioasmBuild-complete.rule
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-build.rule
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-configure.rule
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-download.rule
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-install.rule
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-mkdir.rule
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-patch.rule
+/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cyw43_driver/pioasm/src/PioasmBuild-stamp/PioasmBuild-update.rule
