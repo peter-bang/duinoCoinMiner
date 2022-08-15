@@ -7,4 +7,6 @@ pico_enable_stdio_uart(minerSlave 1)
 
 target_compile_options(minerSlave PRIVATE -Wall)
 
-target_link_libraries(minerSlave pico_stdlib pico_unique_id i2c_slave utils)
+target_link_libraries(minerSlave pico_stdlib pico_unique_id i2c_slave utils mbedcrypto
+mbedx509
+mbedtls)

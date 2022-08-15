@@ -117,6 +117,63 @@ rule CXX_EXECUTABLE_LINKER__minerMaster_Debug
 
 
 #############################################
+# Rule for compiling C files.
+
+rule C_COMPILER__mbedcrypto_Debug
+  depfile = $DEP_FILE
+  deps = gcc
+  command = /Applications/ARM/bin/arm-none-eabi-gcc $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER__mbedcrypto_Debug
+  command = $PRE_LINK && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E rm -f $TARGET_FILE && /Applications/ARM/bin/arm-none-eabi-ar qc $TARGET_FILE $LINK_FLAGS $in && /Applications/ARM/bin/arm-none-eabi-ranlib $TARGET_FILE && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E touch $TARGET_FILE && $POST_BUILD
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER__mbedx509_Debug
+  depfile = $DEP_FILE
+  deps = gcc
+  command = /Applications/ARM/bin/arm-none-eabi-gcc $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER__mbedx509_Debug
+  command = $PRE_LINK && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E rm -f $TARGET_FILE && /Applications/ARM/bin/arm-none-eabi-ar qc $TARGET_FILE $LINK_FLAGS $in && /Applications/ARM/bin/arm-none-eabi-ranlib $TARGET_FILE && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E touch $TARGET_FILE && $POST_BUILD
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER__mbedtls_Debug
+  depfile = $DEP_FILE
+  deps = gcc
+  command = /Applications/ARM/bin/arm-none-eabi-gcc $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER__mbedtls_Debug
+  command = $PRE_LINK && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E rm -f $TARGET_FILE && /Applications/ARM/bin/arm-none-eabi-ar qc $TARGET_FILE $LINK_FLAGS $in && /Applications/ARM/bin/arm-none-eabi-ranlib $TARGET_FILE && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake -E touch $TARGET_FILE && $POST_BUILD
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE

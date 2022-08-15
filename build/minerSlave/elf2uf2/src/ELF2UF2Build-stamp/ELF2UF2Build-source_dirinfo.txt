@@ -4,6 +4,6 @@
 
 method=source_dir
 command=
-source_dir=/Users/peterbang/pico/pico-sdk/tools/elf2uf2
+source_dir=/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2
 work_dir=
 

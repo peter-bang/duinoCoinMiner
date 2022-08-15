@@ -5,6 +5,7 @@
 #include "charbuffer.h"
 #include "Wire.h"
 #include "hwSetupUtils.h"
+#include "duinoCoinUtils.h"
 
 CharBuffer receiveBuffer, requestBuffer;
 
@@ -27,27 +28,33 @@ static void slave_on_request() {
 
 static void slaveLoop() {
     if(!receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1){
-        char lastblockhash[64] = "";
-        char newblockhash[64] = "";
-        char tempDifficulty[8] = "";
-        char tempRequestBuffer[BUF_SIZE] = "";
+        uint8_t lastblockhash[64] = "";
+        uint8_t newblockhash[64] = "";
+        uint8_t tempDifficulty[8] = "";
+        
         uint32_t difficulty;
 
         printf("message received: %s\n", receiveBuffer.buf());
-        receiveBuffer.readStringUntil(',',lastblockhash);
-        receiveBuffer.readStringUntil(',',newblockhash);
-        receiveBuffer.readStringUntil('\n', tempDifficulty);
-        difficulty = atoi(tempDifficulty);
+        printf("time_us_ms: %d\n", time_us_32());
+        receiveBuffer.readStringUntil(',',(char *)lastblockhash);
+        receiveBuffer.readStringUntil(',',(char *)newblockhash);
+        receiveBuffer.readStringUntil('\n', (char *)tempDifficulty);
+        difficulty = atoi((char *)tempDifficulty);
+
         printf("Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
 
-        requestBuffer.clear();
-        int length = sprintf(tempRequestBuffer, "Hello world %ld\n", get_absolute_time());
-        requestBuffer.setBuffer(tempRequestBuffer,length);
-        printf("%s =>> has been input. The length is %d\n",tempRequestBuffer, length);
+        uint32_t result = calculateHash(lastblockhash, newblockhash, difficulty);
+        printf("The hash result is %d\n",result);
+        printf("done");
+        while(1){}
+        // requestBuffer.clear();
+        // int length = sprintf((char *)tempRequestBuffer, "Hello world %ld\n", get_absolute_time());
+        // requestBuffer.setBuffer((char *)tempRequestBuffer,length);
+        // printf("%s =>> has been input. The length is %d\n",tempRequestBuffer, length);
     }
 }
 
-int main() {
+ int main() {
     bi_decl(bi_program_description("Binary for the slave of the duino coin mining example. WIZnet Co,.Ltd"));
     bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
 
@@ -68,4 +75,3 @@ int main() {
         slaveLoop();
     }
 }
-

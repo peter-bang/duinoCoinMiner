@@ -4,7 +4,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/Users/peterbang/pico/pico-sdk/tools/elf2uf2"
+  "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2"
   "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2"
   "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2"
   "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/tmp"

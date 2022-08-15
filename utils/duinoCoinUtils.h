@@ -1,6 +1,8 @@
 #ifndef __DUINOCOINUTILS_H_
 #define __DUINOCOINUTILS_H_
 
-static int get_duino_hash_data (char* data, char* separator, char* last_block_hash, char* expected_hash, uint32_t* difficulty)
+static uint8_t str_to_array(uint8_t * str, uint8_t * hex);
+uint32_t calculateHash(uint8_t * last_block_hash_str, uint8_t * expected_hash_str, uint32_t difficulty);
+
 
 #endif

@@ -60,7 +60,7 @@ int main() {
 
     Wire1.begin();//i2c1 slave start
 
-    char message[] = "8b558f2c3397e19e624ee1c8d98b392893c09dba,7b7695c0fce1cb3deaf366e1cad8772452d02f17,25000\n";
+    char message[] = "4db808021dcee957da8b5f32e2a46a0ca0c6914f,24e948f4ff5a6984fa7b933c0cfa620fdde6c38b,25000\n";
 
     while(1){
         Wire1.beginTransmission(3);

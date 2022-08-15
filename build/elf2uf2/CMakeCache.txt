@@ -214,7 +214,7 @@ elf2uf2_BINARY_DIR:STATIC=/Volumes/외장하드/workspace/rpi-pic
 elf2uf2_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-elf2uf2_SOURCE_DIR:STATIC=/Users/peterbang/pico/pico-sdk/tools/elf2uf2
+elf2uf2_SOURCE_DIR:STATIC=/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2
 
 
 ########################
@@ -293,7 +293,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/Users/peterbang/pico/pico-sdk/tools/elf2uf2
+CMAKE_HOME_DIRECTORY:INTERNAL=/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2
 //ADVANCED property for variable: CMAKE_INSTALL_NAME_TOOL
 CMAKE_INSTALL_NAME_TOOL-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER

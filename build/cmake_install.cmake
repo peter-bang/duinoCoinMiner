@@ -44,6 +44,9 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/utils/cmake_install.cmake")
   include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/cmake_install.cmake")
   include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerMaster/cmake_install.cmake")
+  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/libraries/cmake_install.cmake")
+  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/cmake_install.cmake")
+  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/port/cmake_install.cmake")
 
 endif()
 
