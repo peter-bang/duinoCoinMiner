@@ -1,3 +1,10 @@
+/*
+* name: chartbuffer.h
+* author: peter
+* company: petercircuitsoft
+* brief: Class for the charecter buffer.
+*/
+
 #ifndef __CHARBUFFER_H_
 #define __CHARBUFFER_H_
 

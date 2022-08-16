@@ -25,10 +25,10 @@ collect2: error: ld returned 1 exit status
 Performing C SOURCE FILE Test C_COMPILER_SUPPORTS_WFORMAT_SIGNEDNESS failed with the following output:
 Change Dir: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/opt/homebrew/bin/ninja cmTC_5e492 && [1/2] Building C object CMakeFiles/cmTC_5e492.dir/src.c.obj
-[2/2] Linking C executable cmTC_5e492.elf
-FAILED: cmTC_5e492.elf 
-: && /Applications/ARM/bin/arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Wwrite-strings -Wformat=2 -Wno-format-nonliteral -Wvla -Wlogical-op -Wshadow -Wl,--build-id=none  CMakeFiles/cmTC_5e492.dir/src.c.obj -o cmTC_5e492.elf   && :
+Run Build Command(s):/opt/homebrew/bin/ninja cmTC_1a684 && [1/2] Building C object CMakeFiles/cmTC_1a684.dir/src.c.obj
+[2/2] Linking C executable cmTC_1a684.elf
+FAILED: cmTC_1a684.elf 
+: && /Applications/ARM/bin/arm-none-eabi-gcc -mcpu=cortex-m0plus -mthumb -Wall -Wextra -Wwrite-strings -Wformat=2 -Wno-format-nonliteral -Wvla -Wlogical-op -Wshadow -Wl,--build-id=none  CMakeFiles/cmTC_1a684.dir/src.c.obj -o cmTC_1a684.elf   && :
 /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld: /Applications/ARM/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc.a(lib_a-exit.o): in function `exit':
 exit.c:(.text.exit+0x18): undefined reference to `_exit'
 collect2: error: ld returned 1 exit status

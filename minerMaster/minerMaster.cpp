@@ -9,37 +9,11 @@
 #include "pico/unique_id.h"
 #include "Wire.h"
 #include "hwSetupUtils.h"
+#include "charbuffer.h"
 
 #define BUF_SIZE 256
 
-static struct
-{
-    char buffer[BUF_SIZE];
-    int len = 0;
-    int position = 0;
-} receiveBuffer;
-
-static struct
-{
-    char buffer[BUF_SIZE];
-    int len = 0;
-    int position = 0;
-} requestBuffer;
-
-static void slave_on_receive(int count) {
-    // writes always start with the memory address
-    hard_assert(Wire1.available());
-    while (Wire1.available()) {
-        // save into memory
-        receiveBuffer.buffer[receiveBuffer.len++] = (uint8_t)Wire1.read();
-    }
-}
-
-static void slave_on_request() {
-    // load from memory
-    if(requestBuffer.len > 0 && requestBuffer.buffer[requestBuffer.len] == '\n')
-    Wire1.write(requestBuffer.buffer[requestBuffer.position++]);
-}
+CharBuffer receiveBuffer;
 
 int main() {
     bi_decl(bi_program_description("Binary for the slave of the duino coin mining example. WIZnet Co,.Ltd"));
@@ -48,26 +22,44 @@ int main() {
     stdio_init_all();
     hardwareInit();
     
+    onBoardLedOn();
+    
     //initial delay
     sleep_ms(100);
     
-    //i2c1 setup
-    Wire1.onReceive(slave_on_receive);
-    Wire1.onRequest(slave_on_request);
-    // // in this implementation, the user is responsible for initializing the I2C instance and GPIO
     // // pins before calling Wire::begin()
     printf("Master mode\n");
-
-    Wire1.begin();//i2c1 slave start
+    Wire1.begin();//i2c1 master start
 
     char message[] = "4db808021dcee957da8b5f32e2a46a0ca0c6914f,24e948f4ff5a6984fa7b933c0cfa620fdde6c38b,25000\n";
 
+    uint8_t test_buffer[256] = "";
+    uint8_t result;
+    char core0, core1;
     while(1){
+        uint8_t count;
+        uint8_t temp;
+        //status reading operation
         Wire1.beginTransmission(3);
-        for(int i = 0 ; i < strlen(message) ; i++){
-            Wire1.write(message[i]);
-            }
-        Wire1.endTransmission();
+        Wire1.write(0x00);//ready status
+        Wire1.endTransmission(true);
+
+        //read the status
+        count = Wire1.requestFrom(3,3,false);//status is only 2
+        while(Wire1.available()){
+            temp = Wire1.read();
+            printf("core status: %02x\n",temp);
+            receiveBuffer.write(temp);
+        }
+        core0 = receiveBuffer.read();
+        core1 = receiveBuffer.read();
+        receiveBuffer.clear();
+        if(core0 == '0' || core1 =='0'){
+            Wire1.beginTransmission(3);
+            Wire1.write(0x01);//job
+            Wire1.write((const uint8_t *)message, strlen(message));
+            Wire1.endTransmission(true);
+        }
         sleep_ms(1000);
         onBoardLedToggle();
     }

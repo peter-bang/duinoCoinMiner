@@ -1,3 +1,10 @@
+/*
+* name: chartbuffer.c
+* author: peter
+* company: petercircuitsoft
+* brief: Class for the charecter buffer.
+*/
+
 #include <stdio.h>
 #include <string.h>
 
