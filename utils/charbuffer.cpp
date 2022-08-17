@@ -27,6 +27,9 @@ bool CharBuffer::isEmpty(){
     if(buf_len > 0) return false;//not empty
     return true;//empty
 }
+uint CharBuffer::length(){
+    return buf_len;
+}
 int CharBuffer::write(char c){
     uint32_t irqRestore = save_and_disable_interrupts();
     if(buf_len >= BUF_SIZE) {
@@ -43,7 +46,7 @@ char CharBuffer::read(void){
     uint32_t irqRestore = save_and_disable_interrupts();
     if(buf_len > 0){
         char tempChar = buffer[0];
-        memcpy(buffer, buffer + 1, buf_len--); //buffer + 1 => tempBuffer;
+        memmove(buffer, buffer + 1, buf_len--); //buffer + 1 => tempBuffer;
         memset(buffer+buf_len,'\0',1);
         restore_interrupts(irqRestore);
         return tempChar;

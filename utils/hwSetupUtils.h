@@ -4,7 +4,7 @@
 #include "hardware/i2c.h"
 
 //100khz
-#define I2C_BAUDRATE 50000
+#define I2C_BAUDRATE 100000
 
 // i2c pin number
 #define I2C_SLAVE_SDA_PIN 26
@@ -23,7 +23,7 @@
 #define I2C_SLAVE_ADDRESS_PIN3 19
 
 
-#define DEFAULT_SLAVE_ADDRESS 1
+#define DEFAULT_SLAVE_ADDRESS 0x70
 
 //hardware setup
 void hardwareInit();

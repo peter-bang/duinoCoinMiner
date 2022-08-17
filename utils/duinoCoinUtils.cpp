@@ -25,9 +25,10 @@ typedef enum _DucoState{
 
 static uint8_t duco_core[DUCO_CORE];
 
-uint32_t calculateHash(uint8_t * last_block_hash_str, uint8_t * expected_hash_str, uint32_t difficulty){
+static mbedtls_sha1_context core0_sha1_ctx, core0_sha1_ctx_base;
+static mbedtls_sha1_context core1_sha1_ctx, core1_sha1_ctx_base;
 
-    static mbedtls_sha1_context core0_sha1_ctx, core0_sha1_ctx_base;
+uint32_t calculateHashCore0(uint8_t * last_block_hash_str, uint8_t * expected_hash_str, uint32_t difficulty){
 
     static uint8_t duco_numeric_result_str[16];
     static uint8_t expected_hash_arry[20];
@@ -36,7 +37,7 @@ uint32_t calculateHash(uint8_t * last_block_hash_str, uint8_t * expected_hash_st
     uint32_t hash_number = 0;
     uint32_t ret;
     
-    printf("Calculation starts\n");
+    printf("Core 0: Calculation starts\n");
     //convert string to hex code
     str_to_array(expected_hash_str, expected_hash_arry);
     for (int i = 0 ; i < 20; i++)
@@ -54,7 +55,7 @@ uint32_t calculateHash(uint8_t * last_block_hash_str, uint8_t * expected_hash_st
         printf("Failed mbedtls_sha1_update_ret = %d\r\n", ret);
 
     //find duino coin hash number
-    for (hash_number = 0; hash_number < difficulty * 100 + 1; hash_number++){
+    for (hash_number = 1500000; hash_number < difficulty * 100 + 1; hash_number++){
         memcpy(&core0_sha1_ctx, &core0_sha1_ctx_base, sizeof(mbedtls_sha1_context));
         //initialize the hash number character arry
         memset(duco_numeric_result_str, 0x00, 16);
@@ -75,7 +76,7 @@ uint32_t calculateHash(uint8_t * last_block_hash_str, uint8_t * expected_hash_st
             for (int i = 0 ; i < 20; i++)
             printf("%02x ",hash_result[i]);
             printf("\n");
-            printf("Core0 Find Hash %d\r\n", hash_number);
+            printf("Core0 Hash result %d\r\n", hash_number);
             break;
         }// where is if not!
     }
@@ -90,8 +91,6 @@ uint32_t calculateHash(uint8_t * last_block_hash_str, uint8_t * expected_hash_st
 }
 
 uint32_t calculateHashCore1(uint8_t * last_block_hash_str, uint8_t * expected_hash_str, uint32_t difficulty){
-
-    static mbedtls_sha1_context core0_sha1_ctx, core0_sha1_ctx_base;
     
     static uint8_t duco_numeric_result_str[16];
     static uint8_t expected_hash_arry[20];
@@ -100,36 +99,36 @@ uint32_t calculateHashCore1(uint8_t * last_block_hash_str, uint8_t * expected_ha
     uint32_t hash_number = 0;
     uint32_t ret;
     
-    printf("Calculation starts\n");
+    printf("Core 1: Calculation starts\n");
     //convert string to hex code
     str_to_array(expected_hash_str, expected_hash_arry);
     for (int i = 0 ; i < 20; i++)
         printf("%02x ",expected_hash_arry[i]);
         printf("\n");
     // startTime = time_us_32();
-    mbedtls_sha1_init(&core0_sha1_ctx_base);
+    mbedtls_sha1_init(&core1_sha1_ctx_base);
 
     //hash start???    
-    if( ( ret = mbedtls_sha1_starts_ret( &core0_sha1_ctx_base ) ) != 0 )
+    if( ( ret = mbedtls_sha1_starts_ret( &core1_sha1_ctx_base ) ) != 0 )
         printf("Failed mbedtls_sha1_starts_ret = %d\r\n", ret);
 
     //update last block hash string;
-    if ( ret = mbedtls_sha1_update_ret(&core0_sha1_ctx_base, last_block_hash_str, strlen((char *)last_block_hash_str) ) != 0 )
+    if ( ret = mbedtls_sha1_update_ret(&core1_sha1_ctx_base, last_block_hash_str, strlen((char *)last_block_hash_str) ) != 0 )
         printf("Failed mbedtls_sha1_update_ret = %d\r\n", ret);
 
     //find duino coin hash number
-    for (hash_number = 0; hash_number < difficulty * 100 + 1; hash_number++){
-        memcpy(&core0_sha1_ctx, &core0_sha1_ctx_base, sizeof(mbedtls_sha1_context));
+    for (hash_number = 1500000; hash_number < difficulty * 100 + 1; hash_number++){
+        memcpy(&core1_sha1_ctx, &core1_sha1_ctx_base, sizeof(mbedtls_sha1_context));
         //initialize the hash number character arry
         memset(duco_numeric_result_str, 0x00, 16);
         sprintf((char *)duco_numeric_result_str, "%d", hash_number);
 
         //add hash number to the last block hash
-        if ( ret = mbedtls_sha1_update_ret(&core0_sha1_ctx, duco_numeric_result_str, strlen((char *)duco_numeric_result_str) ) != 0 )
+        if ( ret = mbedtls_sha1_update_ret(&core1_sha1_ctx, duco_numeric_result_str, strlen((char *)duco_numeric_result_str) ) != 0 )
             printf("Failed mbedtls_sha1_update_ret = %d\r\n", ret);
 
         //calculate hash result
-        if ( ret = mbedtls_sha1_finish_ret(&core0_sha1_ctx, hash_result) != 0 )
+        if ( ret = mbedtls_sha1_finish_ret(&core1_sha1_ctx, hash_result) != 0 )
             printf("Failed mbedtls_sha1_finish_ret = %d\r\n", ret);
 
         if(hash_number % 1000 == 0) {onBoardLedToggle();}
@@ -139,7 +138,7 @@ uint32_t calculateHashCore1(uint8_t * last_block_hash_str, uint8_t * expected_ha
             for (int i = 0 ; i < 20; i++)
             printf("%02x ",hash_result[i]);
             printf("\n");
-            printf("Core0 Find Hash %d\r\n", hash_number);
+            printf("Core1 Hash result: %d\r\n", hash_number);
             break;
         }// where is if not!
     }
@@ -147,7 +146,7 @@ uint32_t calculateHashCore1(uint8_t * last_block_hash_str, uint8_t * expected_ha
     // onBoardLedOff();
 
     //free the sha1 memory
-    mbedtls_sha1_free(&core0_sha1_ctx_base);
+    mbedtls_sha1_free(&core1_sha1_ctx_base);
 
     //return hash number
     return hash_number;

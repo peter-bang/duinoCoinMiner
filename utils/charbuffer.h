@@ -20,6 +20,7 @@ public:
     ~CharBuffer();
     char * buf();
     bool isEmpty();
+    uint length();
     int write(char c);
     char read(void);
     int indexOf(int c);

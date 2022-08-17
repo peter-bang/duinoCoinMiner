@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "pico/multicore.h"
@@ -28,48 +29,65 @@ uint8_t TempBufferCore1[256];
 void core1_entry() {
     while(1){
         if(HashOrder == 1 && !receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1){
-            
+            memset(TempBufferCore1,0,256);
+            HashCalStatusCore1 = HASH_BUSY;
             uint32_t startTime = 0;
             uint32_t endTime = 0;
-            uint32_t elapsed_time_s = 0;
-            uint8_t jobnumber[2] = "";// this should be number between 0 to 99
+            uint32_t elapsed_time = 0;
+            
+            uint8_t jobnumber[32] = "";// this should be number between 0 to 99
             uint8_t lastblockhash[64] = "";
             uint8_t newblockhash[64] = "";
             uint8_t tempDifficulty[8] = "";
 
+
             uint32_t difficulty = 0;
-
-            static float hashRate = 0;
-
-            printf("message received: %s\n", receiveBuffer.buf());
-            printf("time_us_ms: %d\n", time_us_32());
+            uint32_t jobNumber = 0;
 
             receiveBuffer.readStringUntil(',',(char *)jobnumber);
             receiveBuffer.readStringUntil(',',(char *)lastblockhash);
             receiveBuffer.readStringUntil(',',(char *)newblockhash);
             receiveBuffer.readStringUntil('\n', (char *)tempDifficulty);
             difficulty = atoi((char *)tempDifficulty);
+            jobNumber = atoi((char *)jobnumber);
+
+            if(jobNumber == 0 || difficulty == 0 || strlen((char *)lastblockhash) == 0 || strlen((char *)newblockhash) == 0){
+                printf("Something wrong with the data from the master.\n");
+                HashCalStatusCore1 = HASH_IDLE;
+                return;
+            }
 
             printf("Form Core1: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
-            HashCalStatusCore1 = HASH_BUSY;
+            
             startTime = time_us_32();
             //while hash calculation on core 0, it's not able to assign a hash job to core 1.
-            uint32_t result = calculateHash(lastblockhash, newblockhash, difficulty);
-            startTime = time_us_32();
+            uint32_t result = calculateHashCore1(lastblockhash, newblockhash, difficulty);
+            endTime = time_us_32();
             
-            elapsed_time_s = endTime - startTime;//us
-            hashRate = 
+            elapsed_time = endTime - startTime;//us
+            printf("Core0: endTime: %d, startTime: %d\n",endTime,startTime);
             //hash rate needs to be calculated.
             //Update Buffer
-
-            HashCalStatusCore1 = HASH_DONE;
+            //만들자,
+            sprintf((char *)TempBufferCore1,"%d,%d\n", result, elapsed_time);
+            // sprintf((char *)TempBufferCore0,"%s,%s,%s\n", jobnumber, result, elapsed_time);
+            printf("%s",TempBufferCore1);
             // uint32_t result = 0;
             printf("Form Core1: The hash result is %d\n",result);
+            HashCalStatusCore1 = HASH_DONE;
         }
     }
 }
 
+//request callback
+static void slave_on_request() {
+    uint8_t value = requestBuffer.read();
+        Wire1.write(value);//send requestBuffer
+        // printf("value:%02x\n",value);
+}
+
 static void slave_on_receive(int count) {
+    
     uint8_t command;
     hard_assert(Wire1.available());
     command = (uint8_t)Wire1.read();//first byte is command.
@@ -80,7 +98,6 @@ static void slave_on_receive(int count) {
         while (Wire1.available()) { //clear the receive buffer
             Wire1.read();
         }
-        printf("%c, %c\n",HashCalStatusCore0,HashCalStatusCore1);
         requestBuffer.write(HashCalStatusCore0);//Core 0 status
         requestBuffer.write(HashCalStatusCore1);//Core 1 status
         requestBuffer.write('\n');
@@ -90,18 +107,23 @@ static void slave_on_receive(int count) {
         while (Wire1.available())
         {
             receiveBuffer.write((uint8_t)Wire1.read());
-        }//job copy done. => HashCalStatusCore0(코어0 해쉬가 돌고 있나?) 그럼 코어 2에서 들고 가도록 하고... 둘다 돌고 있나? 그럼 무시해야지. 버퍼 비워버려.
+        }
         if(HashCalStatusCore0 == HASH_IDLE){
-                HashOrder = 0;
+            HashOrder = 0;
+            break;
         }// hash core 0 우선.
         else if(HashCalStatusCore1 == HASH_IDLE){
-                HashOrder = 1;
-        }// hash core 1 없다면 코어 1
+            HashOrder = 1;//core 1 run
+            break;
+        } else {
+            // 버려
+            receiveBuffer.clear();
+        }
         break;
 
     case 0x02: //Read result
         /* code */
-        while (Wire1.available()) { //clear the receive buffer
+        while (Wire1.available()) { //clear i2c receive buffer
             Wire1.read();
         }
         if(HashCalStatusCore0 == HASH_DONE)
@@ -115,57 +137,59 @@ static void slave_on_receive(int count) {
     }
 }
 
-//request callback
-static void slave_on_request() {
-    //if requestBuffer is not empty && requestBuffer has '\n'
-    uint8_t value = requestBuffer.read();
-        Wire1.write(value);//send requestBuffer
-}
-
 static void slaveLoop() {
-    if(!receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1){
-        
-        uint32_t startTime = 0;
-        uint32_t endTime = 0;
+    if(HashOrder == 0 && !receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1)
+    {
+            memset(TempBufferCore0,0,256);
+            HashCalStatusCore0 = HASH_BUSY;
+            uint32_t startTime = 0;
+            uint32_t endTime = 0;
+            uint32_t elapsed_time = 0;
+            
+            uint8_t jobnumber[32] = "";// this should be number between 0 to 99
+            uint8_t lastblockhash[64] = "";
+            uint8_t newblockhash[64] = "";
+            uint8_t tempDifficulty[8] = "";
 
-        uint8_t jobnumber[2] = "";// this should be number between 0 to 99
-        uint8_t lastblockhash[64] = "";
-        uint8_t newblockhash[64] = "";
-        uint8_t tempDifficulty[8] = "";
+            uint32_t jobNumber = 0;
+            uint32_t difficulty = 0;
 
-        uint32_t difficulty;
+            receiveBuffer.readStringUntil(',',(char *)jobnumber);
+            receiveBuffer.readStringUntil(',',(char *)lastblockhash);
+            receiveBuffer.readStringUntil(',',(char *)newblockhash);
+            receiveBuffer.readStringUntil('\n', (char *)tempDifficulty);
+            difficulty = atoi((char *)tempDifficulty);
+            jobNumber = atoi((char *)jobnumber);
 
-        printf("message received: %s\n", receiveBuffer.buf());
-        printf("time_us_ms: %d\n", time_us_32());
+            if(jobNumber == 0 || difficulty == 0 || strlen((char *)lastblockhash) == 0 || strlen((char *)newblockhash) == 0){
+                printf("Something wrong with the data from the master.\n");
+                HashCalStatusCore0 = HASH_IDLE;
+                return;
+            }
 
-        // receiveBuffer.readStringUntil(',',(char *)jobnumber);
-        receiveBuffer.readStringUntil(',',(char *)lastblockhash);
-        receiveBuffer.readStringUntil(',',(char *)newblockhash);
-        receiveBuffer.readStringUntil('\n', (char *)tempDifficulty);
-        difficulty = atoi((char *)tempDifficulty);
-
-        printf("Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
-        HashCalStatusCore0 = HASH_BUSY;
-
-        startTime = time_us_32();
-        //while hash calculation on core 0, it's not able to assign a hash job to core 1.
-        uint32_t result = calculateHash(lastblockhash, newblockhash, difficulty);
-        startTime = time_us_32();
-
-        //hash rate needs to be calculated.
-
-        HashCalStatusCore0 = HASH_DONE;
-        // uint32_t result = 0;
-        printf("The hash result is %d\n",result);
-        // requestBuffer.clear();
-        // int length = sprintf((char *)tempRequestBuffer, "Hello world %ld\n", get_absolute_time());
-        // requestBuffer.setBuffer((char *)tempRequestBuffer,length);
-        // printf("%s =>> has been input. The length is %d\n",tempRequestBuffer, length);
-    }
+            printf("Form Core0: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
+            
+            startTime = time_us_32();
+            //while hash calculation on core 0, it's not able to assign a hash job to core 1.
+            uint32_t result = calculateHashCore0(lastblockhash, newblockhash, difficulty);
+            endTime = time_us_32();
+            
+            elapsed_time = endTime - startTime;//us
+            printf("Core0: endTime: %d, startTime: %d\n",endTime,startTime);
+            //hash rate needs to be calculated.
+            //Update Buffer
+            //만들자,
+            sprintf((char *)TempBufferCore0,"%d,%d\n", result, elapsed_time);
+            // sprintf((char *)TempBufferCore0,"%s,%s,%s\n", jobnumber, result, elapsed_time);
+            printf("%s",TempBufferCore0); 
+            // uint32_t result = 0;
+            printf("Form Core0: The hash result is %d\n",result);
+            HashCalStatusCore0 = HASH_DONE;
+        }
 }
 
 int main() {
-    bi_decl(bi_program_description("Binary for the slave of the duino coin mining example. WIZnet Co,.Ltd"));
+    bi_decl(bi_program_description("Binary f Por the slave of the duino coin mining example. WIZnet Co,.Ltd"));
     bi_decl(bi_1pin_with_name(LED_PIN, "On-board LED"));
 
     stdio_init_all();
@@ -176,13 +200,16 @@ int main() {
     //initial delay
     sleep_ms(100);
 
+    multicore_launch_core1(core1_entry);
+
     //i2c1 setup
     Wire1.onReceive(slave_on_receive);
     Wire1.onRequest(slave_on_request);
     // // in this implementation, the user is responsible for initializing the I2C instance and GPIO
     // // pins before calling Wire::begin()
-    printf("I2C Slave starts with address %d\n",getAddress());
-    Wire1.begin(getAddress());//i2c1 slave start
+    uint8_t slaveAddress = getAddress();
+    printf("I2C Slave starts with address %d\n",slaveAddress);
+    Wire1.begin(slaveAddress);//i2c1 slave start
     
     while(1){
         slaveLoop();

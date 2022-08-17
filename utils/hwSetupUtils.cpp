@@ -46,7 +46,7 @@ uint8_t getAddress(){
     (gpio_get(I2C_SLAVE_ADDRESS_PIN3) << 3);
     
     //if there is something wrong with address read from GPIO, will return 1;
-    return ((tempAddress > 0) && (tempAddress < 128)) ? tempAddress : DEFAULT_SLAVE_ADDRESS;
+    return ((tempAddress > 0) && (tempAddress < 128)) ? DEFAULT_SLAVE_ADDRESS|tempAddress : DEFAULT_SLAVE_ADDRESS;
 }
 
 
