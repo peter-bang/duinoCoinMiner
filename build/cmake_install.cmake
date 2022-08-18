@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner
+# Install script for directory: /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,14 +39,14 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/i2c_slave/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/utils/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerMaster/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/libraries/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/port/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/i2c_slave/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/utils/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerMaster/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/libraries/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/port/cmake_install.cmake")
 
 endif()
 
@@ -58,5 +58,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

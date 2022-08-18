@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "pico/multicore.h"
 
-#include "charbuffer.h"
 #include "Wire.h"
+#include "charbuffer.h"
 #include "hwSetupUtils.h"
 #include "duinoCoinUtils.h"
 
@@ -21,14 +22,14 @@ typedef enum _HashCalStatus {
 static HashCalStatus HashCalStatusCore0 = HASH_IDLE;
 static HashCalStatus HashCalStatusCore1 = HASH_IDLE;
 
-uint8_t HashOrder = 0;
+uint8_t Core1Trigger = 0;
 
 uint8_t TempBufferCore0[256];
 uint8_t TempBufferCore1[256];
 
-void core1_entry() {
+void slaveLoopCore1() {
     while(1){
-        if(HashOrder == 1 && !receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1){
+        if(Core1Trigger && !receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1){
             memset(TempBufferCore1,0,256);
             HashCalStatusCore1 = HASH_BUSY;
             uint32_t startTime = 0;
@@ -44,6 +45,7 @@ void core1_entry() {
             uint32_t difficulty = 0;
             uint32_t jobNumber = 0;
 
+            printf("slaveloopCore1:!!! %s", receiveBuffer.buf());
             receiveBuffer.readStringUntil(',',(char *)jobnumber);
             receiveBuffer.readStringUntil(',',(char *)lastblockhash);
             receiveBuffer.readStringUntil(',',(char *)newblockhash);
@@ -52,12 +54,12 @@ void core1_entry() {
             jobNumber = atoi((char *)jobnumber);
 
             if(jobNumber == 0 || difficulty == 0 || strlen((char *)lastblockhash) == 0 || strlen((char *)newblockhash) == 0){
-                printf("Something wrong with the data from the master.\n");
+                printf("From Core1: Something wrong with the data from the master.\n");
                 HashCalStatusCore1 = HASH_IDLE;
                 return;
             }
 
-            printf("Form Core1: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
+            printf("From Core1: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
             
             startTime = time_us_32();
             //while hash calculation on core 0, it's not able to assign a hash job to core 1.
@@ -65,15 +67,14 @@ void core1_entry() {
             endTime = time_us_32();
             
             elapsed_time = endTime - startTime;//us
-            printf("Core0: endTime: %d, startTime: %d\n",endTime,startTime);
+            // printf("Core1: endTime: %d, startTime: %d\n",endTime,startTime);
             //hash rate needs to be calculated.
             //Update Buffer
             //만들자,
-            sprintf((char *)TempBufferCore1,"%d,%d\n", result, elapsed_time);
+            sprintf((char *)TempBufferCore1,"%d,%d,%d\n",jobNumber, result, elapsed_time);
             // sprintf((char *)TempBufferCore0,"%s,%s,%s\n", jobnumber, result, elapsed_time);
-            printf("%s",TempBufferCore1);
             // uint32_t result = 0;
-            printf("Form Core1: The hash result is %d\n",result);
+            printf("Form Core1: The hash result is %d\n",TempBufferCore1);
             HashCalStatusCore1 = HASH_DONE;
         }
     }
@@ -82,8 +83,8 @@ void core1_entry() {
 //request callback
 static void slave_on_request() {
     uint8_t value = requestBuffer.read();
-        Wire1.write(value);//send requestBuffer
-        // printf("value:%02x\n",value);
+    Wire1.write(value);//send requestBuffer
+
 }
 
 static void slave_on_receive(int count) {
@@ -98,26 +99,20 @@ static void slave_on_receive(int count) {
         while (Wire1.available()) { //clear the receive buffer
             Wire1.read();
         }
+        requestBuffer.clear();
         requestBuffer.write(HashCalStatusCore0);//Core 0 status
         requestBuffer.write(HashCalStatusCore1);//Core 1 status
         requestBuffer.write('\n');
         break;
     
     case 0x01: //job allocation
-        while (Wire1.available())
-        {
+        while (Wire1.available()){
             receiveBuffer.write((uint8_t)Wire1.read());
         }
-        if(HashCalStatusCore0 == HASH_IDLE){
-            HashOrder = 0;
-            break;
-        }// hash core 0 우선.
-        else if(HashCalStatusCore1 == HASH_IDLE){
-            HashOrder = 1;//core 1 run
-            break;
+        if(receiveBuffer.indexOf('\n') != 0 && HashCalStatusCore1 == HASH_IDLE && HashCalStatusCore0 != HASH_IDLE){
+            Core1Trigger = 1;
         } else {
-            // 버려
-            receiveBuffer.clear();
+            Core1Trigger = 0;
         }
         break;
 
@@ -126,19 +121,34 @@ static void slave_on_receive(int count) {
         while (Wire1.available()) { //clear i2c receive buffer
             Wire1.read();
         }
-        if(HashCalStatusCore0 == HASH_DONE)
+        if(HashCalStatusCore0 == HASH_DONE){
             requestBuffer.setBuffer((char *)TempBufferCore0,256);//hash result + socket number
-        else if(HashCalStatusCore1 == HASH_DONE)
+            printf("requestBuffer:%s",requestBuffer.buf());//여기는 잘 나옴.
+            HashCalStatusCore0 = HASH_IDLE;
+        }
+        else if(HashCalStatusCore1 == HASH_DONE){
             requestBuffer.setBuffer((char *)TempBufferCore1,256);//hash result + socket number
+            printf("requestBuffer:%s",requestBuffer.buf());//여기는 잘 나옴.
+            HashCalStatusCore1 = HASH_IDLE;
+        }
         else {}//do nothing!}
         break;
+
+        case 0x03: // Read Done
+        while (Wire1.available()) { //clear i2c receive buffer
+            Wire1.read();
+        }
+        //do nothing yet...
+        //todo
+        break;
+
     default:
         break;
     }
 }
 
 static void slaveLoop() {
-    if(HashOrder == 0 && !receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1)
+    if(Core1Trigger == 0 && !receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1)
     {
             memset(TempBufferCore0,0,256);
             HashCalStatusCore0 = HASH_BUSY;
@@ -154,20 +164,22 @@ static void slaveLoop() {
             uint32_t jobNumber = 0;
             uint32_t difficulty = 0;
 
+            printf("slaveloopCore0:!!! %s",receiveBuffer.buf());
             receiveBuffer.readStringUntil(',',(char *)jobnumber);
             receiveBuffer.readStringUntil(',',(char *)lastblockhash);
             receiveBuffer.readStringUntil(',',(char *)newblockhash);
             receiveBuffer.readStringUntil('\n', (char *)tempDifficulty);
+
             difficulty = atoi((char *)tempDifficulty);
             jobNumber = atoi((char *)jobnumber);
 
             if(jobNumber == 0 || difficulty == 0 || strlen((char *)lastblockhash) == 0 || strlen((char *)newblockhash) == 0){
-                printf("Something wrong with the data from the master.\n");
+                printf("From Core0: Something wrong with the data from the master.\n");
                 HashCalStatusCore0 = HASH_IDLE;
                 return;
             }
 
-            printf("Form Core0: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
+            printf("From Core0: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
             
             startTime = time_us_32();
             //while hash calculation on core 0, it's not able to assign a hash job to core 1.
@@ -175,15 +187,14 @@ static void slaveLoop() {
             endTime = time_us_32();
             
             elapsed_time = endTime - startTime;//us
-            printf("Core0: endTime: %d, startTime: %d\n",endTime,startTime);
+            // printf("Core0: endTime: %d, startTime: %d\n",endTime,startTime);
             //hash rate needs to be calculated.
             //Update Buffer
             //만들자,
-            sprintf((char *)TempBufferCore0,"%d,%d\n", result, elapsed_time);
+            sprintf((char *)TempBufferCore0,"%d,%d,%d\n",jobNumber, result, elapsed_time);
             // sprintf((char *)TempBufferCore0,"%s,%s,%s\n", jobnumber, result, elapsed_time);
-            printf("%s",TempBufferCore0); 
             // uint32_t result = 0;
-            printf("Form Core0: The hash result is %d\n",result);
+            printf("Form Core0: The hash result is %d\n",TempBufferCore0);
             HashCalStatusCore0 = HASH_DONE;
         }
 }
@@ -194,13 +205,9 @@ int main() {
 
     stdio_init_all();
     hardwareInit();
-    
-    // multicore_launch_core1(core1_entry);
 
     //initial delay
     sleep_ms(100);
-
-    multicore_launch_core1(core1_entry);
 
     //i2c1 setup
     Wire1.onReceive(slave_on_receive);
@@ -211,6 +218,10 @@ int main() {
     printf("I2C Slave starts with address %d\n",slaveAddress);
     Wire1.begin(slaveAddress);//i2c1 slave start
     
+    sleep_ms(100);
+
+    multicore_launch_core1(slaveLoopCore1);
+
     while(1){
         slaveLoop();
     }

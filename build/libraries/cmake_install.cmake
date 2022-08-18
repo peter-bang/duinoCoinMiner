@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries
+# Install script for directory: /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

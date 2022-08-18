@@ -26,6 +26,7 @@ public:
     int indexOf(int c);
     int readStringUntil(int c, char *);
     void setBuffer(char *, int);
+    void addString(char *, int);
     void clear();
 };
 

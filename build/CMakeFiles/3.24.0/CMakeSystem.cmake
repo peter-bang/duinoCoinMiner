@@ -3,7 +3,7 @@ set(CMAKE_HOST_SYSTEM_NAME "Darwin")
 set(CMAKE_HOST_SYSTEM_VERSION "21.6.0")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
-include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/cmake/preload/toolchains/pico_arm_gcc.cmake")
+include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/cmake/preload/toolchains/pico_arm_gcc.cmake")
 
 set(CMAKE_SYSTEM "PICO")
 set(CMAKE_SYSTEM_NAME "PICO")

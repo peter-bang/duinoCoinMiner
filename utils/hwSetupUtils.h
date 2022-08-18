@@ -1,6 +1,10 @@
 #ifndef __HWSETUPUTILS_H_
 #define __HWSETUPUTILS_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "hardware/i2c.h"
 
 //100khz
@@ -34,5 +38,10 @@ uint8_t getAddress();
 void onBoardLedToggle();
 void onBoardLedOff();
 void onBoardLedOn();
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

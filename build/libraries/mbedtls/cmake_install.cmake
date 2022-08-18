@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/mbedtls
+# Install script for directory: /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/mbedtls
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/include/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/3rdparty/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/library/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/include/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/3rdparty/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/libraries/mbedtls/library/cmake_install.cmake")
 
 endif()
 

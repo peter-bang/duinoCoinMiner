@@ -55,7 +55,7 @@ uint32_t calculateHashCore0(uint8_t * last_block_hash_str, uint8_t * expected_ha
         printf("Failed mbedtls_sha1_update_ret = %d\r\n", ret);
 
     //find duino coin hash number
-    for (hash_number = 1500000; hash_number < difficulty * 100 + 1; hash_number++){
+    for (hash_number = 0; hash_number < difficulty * 100 + 1; hash_number++){
         memcpy(&core0_sha1_ctx, &core0_sha1_ctx_base, sizeof(mbedtls_sha1_context));
         //initialize the hash number character arry
         memset(duco_numeric_result_str, 0x00, 16);
@@ -117,7 +117,7 @@ uint32_t calculateHashCore1(uint8_t * last_block_hash_str, uint8_t * expected_ha
         printf("Failed mbedtls_sha1_update_ret = %d\r\n", ret);
 
     //find duino coin hash number
-    for (hash_number = 1500000; hash_number < difficulty * 100 + 1; hash_number++){
+    for (hash_number = 0; hash_number < difficulty * 100 + 1; hash_number++){
         memcpy(&core1_sha1_ctx, &core1_sha1_ctx_base, sizeof(mbedtls_sha1_context));
         //initialize the hash number character arry
         memset(duco_numeric_result_str, 0x00, 16);

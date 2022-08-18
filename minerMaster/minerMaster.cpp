@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> 
+#include <string.h>
+
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 #include "hardware/i2c.h"
@@ -23,11 +24,14 @@ uint8_t ducoSlave[10];
 
 CharBuffer receiveBuffer;
 
+//Duino coin server functions
+uint32_t readJob(uint8_t * job, uint8_t socketNumber);
+uint8_t sendResult(uint8_t * result);
+
 uint32_t writeCmd(uint8_t slaveAddress, uint8_t cmd, uint8_t * follow, uint32_t len);
-uint32_t readData(uint8_t slaveAddress);
+uint32_t readData(uint8_t slaveAddress, uint32_t len);
 uint32_t busScan(uint8_t * slaveAddressArray);
 bool reserved_addr(uint8_t addr);
-
 
 int main() {
     bi_decl(bi_program_description("Binary for the slave of the duino coin mining example. WIZnet Co,.Ltd"));
@@ -39,49 +43,52 @@ int main() {
     onBoardLedOn();
     
     //initial delay
-    sleep_ms(100);
+    sleep_ms(1000);
     
-    // // pins before calling Wire::begin()
+    Wire1.begin();
+
     printf("Master starts\n");
-    Wire1.begin();//i2c1 master start
 
-    char core0, core1;
+    uint8_t job[BUF_SIZE];
+    printf("I2C Bus scanning..\n");
 
-    
-    while(1){
-        char message[] = "10,4db808021dcee957da8b5f32e2a46a0ca0c6914f,24e948f4ff5a6984fa7b933c0cfa620fdde6c38b,25000\n";
+    uint32_t slaveCount = busScan(ducoSlave);
 
-        printf("I2C slave scanning.\n");
-        sleep_ms(100);
-        uint32_t slaveCount = busScan(ducoSlave);
-        printf("%d of slaves are detected.\n",slaveCount);
+    printf("%d of slaves are detected.\n",slaveCount);
         
-        for(int i = 0 ; i < slaveCount ; i++)
-            printf("Detected slave address[%d]: %d\n",i, ducoSlave[i]);
+    for(int i = 0 ; i < slaveCount ; i++)
+        printf("Detected slave address[%d]: %d\n",i, ducoSlave[i]);
 
+
+    while(1){        
         for(int i = 0; i < slaveCount; i++){
             writeCmd(ducoSlave[i],CMD_STATUS,NULL,0);//read status command
-            readData(ducoSlave[i]);//read status data
-            core0 = receiveBuffer.read();
-            core1 = receiveBuffer.read();
+            readData(ducoSlave[i], 128);//read status data
+            uint8_t core0 = receiveBuffer.read();
+            uint8_t core1 = receiveBuffer.read();
             receiveBuffer.clear();
-            printf("Address: %d \t", ducoSlave[i]);
-            printf("Core0: ");
-            if(core0 == '0') printf("IDLE");
-            else if(core0 == '1') printf("BUSY");
-            else printf("DONE");
 
-            printf("\tCore1: ");
-            if(core1 == '0')printf("IDLE");
-            else if(core1 == '1') printf("BUSY");
-            else printf("DONE");
-            printf("\n");
-            if(core0 == '0' || core1 =='0'){
-                writeCmd(ducoSlave[i],CMD_WRITE_JOB, (uint8_t *)message, strlen(message));
+            if(core0 == '0' || core1 =='0'){//HASH_IDLE
+                //get the job from the duino coin server
+                uint8_t socketNumber = rand()%99;
+                uint32_t length = readJob(job, socketNumber);
+                //send the write job command and the job string
+                printf("Job allocated => %s\n",job);
+                writeCmd(ducoSlave[i],CMD_WRITE_JOB, (uint8_t *)job, length);
+            } else if (core0 == '2' || core1 == '2'){//HASH_DONE
+                //send the read result command
+                writeCmd(ducoSlave[i],CMD_READ_RESULT,NULL,0);
+                //read results
+                readData(ducoSlave[i],128);
+
+                //do something with the result
+
+                //send result to the duino coin server
+                sendResult((uint8_t*)receiveBuffer.buf());
+                //clear receive Buffer
+                receiveBuffer.clear();
             }
-            sleep_ms(1000);
         }
-        // sleep_ms(1000);
         onBoardLedToggle();
     }
 }
@@ -94,11 +101,9 @@ uint32_t busScan(uint8_t * slaveAddressArray){
         if (reserved_addr(addr))
             ret = PICO_ERROR_GENERIC;
         else{
-            // sleep_ms(10);
             ret = i2c_read_blocking(i2c1, addr, &dummy, 1, false);
         }
-        if(ret > 0)
-        {
+        if(ret > 0){
             slaveAddressArray[slaveCount++] = addr;
         }
         if(slaveCount > 10){
@@ -126,12 +131,27 @@ uint32_t writeCmd(uint8_t slaveAddress, uint8_t cmd, uint8_t * follow, uint32_t 
     //should do something with counter
 }
 
-uint32_t readData(uint8_t slaveAddress){
+uint32_t readData(uint8_t slaveAddress, uint32_t len){
     uint32_t count;
     uint8_t status;
-    count = Wire1.requestFrom(slaveAddress,128,false);// Status: Core0 | Core1 | '\n'
+    count = Wire1.requestFrom(slaveAddress,len,false);// Status: Core0 | Core1 | '\n'
     while(Wire1.available()){
         receiveBuffer.write((uint8_t)Wire1.read());
     }
     return receiveBuffer.length();
+}
+
+uint32_t readJob(uint8_t * job, uint8_t socketNumber){
+    //소켓번호 할당해야함.
+
+    char dummyMessage[] = "4db808021dcee957da8b5f32e2a46a0ca0c6914f,24e948f4ff5a6984fa7b933c0cfa620fdde6c38b,25000\n";
+    
+    sprintf((char*)job, "%02d,%s", socketNumber, dummyMessage);
+
+    return strlen((char*)job);
+}
+
+uint8_t sendResult(uint8_t * result){
+    printf("Result: %s\n",result);
+    return 0;
 }

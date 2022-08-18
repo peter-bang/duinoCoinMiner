@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src
+# Install script for directory: /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,9 +39,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/common/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cmake_install.cmake")
-  include("/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2040/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/common/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/cmake_install.cmake")
+  include("/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2040/cmake_install.cmake")
 
 endif()
 

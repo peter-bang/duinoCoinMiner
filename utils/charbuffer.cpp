@@ -20,17 +20,24 @@ CharBuffer::~CharBuffer()
 {
 }
 
-char * CharBuffer::buf(){
+char * CharBuffer::buf()
+{
     return buffer;
 }
-bool CharBuffer::isEmpty(){
+
+bool CharBuffer::isEmpty()
+{
     if(buf_len > 0) return false;//not empty
     return true;//empty
 }
-uint CharBuffer::length(){
+
+uint CharBuffer::length()
+{
     return buf_len;
 }
-int CharBuffer::write(char c){
+
+int CharBuffer::write(char c)
+{
     uint32_t irqRestore = save_and_disable_interrupts();
     if(buf_len >= BUF_SIZE) {
         restore_interrupts(irqRestore);
@@ -82,11 +89,32 @@ int CharBuffer::readStringUntil(int c, char *str){
 
 void CharBuffer::setBuffer(char *str, int len){
     uint32_t irqRestore = save_and_disable_interrupts();
-    memcpy(buffer, str, len);
-    buf_len = len;
+    if(len > BUF_SIZE)
+    {
+        memcpy(buffer, str, BUF_SIZE);
+        buf_len = BUF_SIZE;
+    }
+    else
+    {
+        memcpy(buffer, str, len);
+        buf_len = len;
+    }
     restore_interrupts(irqRestore);
 }
-
+void CharBuffer::addString(char *str, int len){
+    uint32_t irqRestore = save_and_disable_interrupts();
+    if(buf_len + len >= BUF_SIZE)
+    {
+        memcpy(buffer+buf_len, str, BUF_SIZE-buf_len);
+        buf_len = BUF_SIZE;
+    }
+    else
+    {
+        memcpy(buffer+buf_len, str, len);
+        buf_len = buf_len + len;
+    }
+    restore_interrupts(irqRestore);
+}
 void CharBuffer::clear(){
     uint32_t irqRestore = save_and_disable_interrupts();
     buf_len = 0;

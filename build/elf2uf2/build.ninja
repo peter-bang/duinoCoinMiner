@@ -31,7 +31,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2/
+cmake_ninja_workdir = /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2/
 # =============================================================================
 # Object build statements for EXECUTABLE target elf2uf2
 
@@ -41,10 +41,10 @@ cmake_ninja_workdir = /Volumes/외장하드/workspace/rpi-pico/du
 
 build cmake_object_order_depends_target_elf2uf2: phony || CMakeFiles/elf2uf2.dir
 
-build CMakeFiles/elf2uf2.dir/main.cpp.o: CXX_COMPILER__elf2uf2_ /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2/main.cpp || cmake_object_order_depends_target_elf2uf2
+build CMakeFiles/elf2uf2.dir/main.cpp.o: CXX_COMPILER__elf2uf2_ /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2/main.cpp || cmake_object_order_depends_target_elf2uf2
   DEP_FILE = CMakeFiles/elf2uf2.dir/main.cpp.o.d
   FLAGS = -arch x86_64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++14
-  INCLUDES = -I/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/common/boot_uf2/include
+  INCLUDES = -I/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/common/boot_uf2/include
   OBJECT_DIR = CMakeFiles/elf2uf2.dir
   OBJECT_FILE_DIR = CMakeFiles/elf2uf2.dir
 
@@ -69,7 +69,7 @@ build elf2uf2: CXX_EXECUTABLE_LINKER__elf2uf2_ CMakeFiles/elf2uf2.dir/main.cpp.o
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2 && /opt/homebrew/Cellar/cmake/3.24.0/bin/ccmake -S/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2 -B/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
+  COMMAND = cd /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2 && /opt/homebrew/Cellar/cmake/3.24.0/bin/ccmake -S/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2 -B/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -81,7 +81,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2 && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake --regenerate-during-build -S/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2 -B/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
+  COMMAND = cd /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2 && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake --regenerate-during-build -S/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2 -B/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -90,7 +90,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2/CMakeLists.txt
+# /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2/CMakeLists.txt
 # =============================================================================
 
 
@@ -98,7 +98,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Utility command for edit_cache
 
 build boot_uf2_headers/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2/boot_uf2_headers && /opt/homebrew/Cellar/cmake/3.24.0/bin/ccmake -S/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2 -B/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
+  COMMAND = cd /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2/boot_uf2_headers && /opt/homebrew/Cellar/cmake/3.24.0/bin/ccmake -S/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2 -B/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
   DESC = Running CMake cache editor...
   pool = console
   restat = 1
@@ -110,7 +110,7 @@ build boot_uf2_headers/edit_cache: phony boot_uf2_headers/CMakeFiles/edit_cache.
 # Utility command for rebuild_cache
 
 build boot_uf2_headers/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2/boot_uf2_headers && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake --regenerate-during-build -S/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2 -B/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
+  COMMAND = cd /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2/boot_uf2_headers && /opt/homebrew/Cellar/cmake/3.24.0/bin/cmake --regenerate-during-build -S/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2 -B/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -126,14 +126,14 @@ build boot_uf2_headers/rebuild_cache: phony boot_uf2_headers/CMakeFiles/rebuild_
 # =============================================================================
 
 #############################################
-# Folder: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
+# Folder: /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2
 
 build all: phony elf2uf2 boot_uf2_headers/all
 
 # =============================================================================
 
 #############################################
-# Folder: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2/boot_uf2_headers
+# Folder: /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2/boot_uf2_headers
 
 build boot_uf2_headers/all: phony
 
@@ -144,14 +144,14 @@ build boot_uf2_headers/all: phony
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/common/boot_uf2/CMakeLists.txt /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.0/CMakeCCompiler.cmake CMakeFiles/3.24.0/CMakeCXXCompiler.cmake CMakeFiles/3.24.0/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/common/boot_uf2/CMakeLists.txt /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.0/CMakeCCompiler.cmake CMakeFiles/3.24.0/CMakeCXXCompiler.cmake CMakeFiles/3.24.0/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/common/boot_uf2/CMakeLists.txt /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.0/CMakeCCompiler.cmake CMakeFiles/3.24.0/CMakeCXXCompiler.cmake CMakeFiles/3.24.0/CMakeSystem.cmake: phony
+build /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/common/boot_uf2/CMakeLists.txt /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2/CMakeLists.txt /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCXXInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeCommonLanguageInclude.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeGenericSystem.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeInitializeConfigs.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeLanguageInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeSystemSpecificInformation.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/CMakeSystemSpecificInitialize.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/CMakeCommonCompilerMacros.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/Clang.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Compiler/GNU.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-AppleClang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-AppleClang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang-C.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang-CXX.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Apple-Clang.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Darwin-Initialize.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/Darwin.cmake /opt/homebrew/Cellar/cmake/3.24.0/share/cmake/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.24.0/CMakeCCompiler.cmake CMakeFiles/3.24.0/CMakeCXXCompiler.cmake CMakeFiles/3.24.0/CMakeSystem.cmake: phony
 
 
 #############################################

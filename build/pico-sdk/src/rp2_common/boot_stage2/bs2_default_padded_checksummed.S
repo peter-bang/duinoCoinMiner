@@ -1,4 +1,4 @@
-// Padded and checksummed version of: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
+// Padded and checksummed version of: /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/pico-sdk/src/rp2_common/boot_stage2/bs2_default.bin
 
 .cpu cortex-m0plus
 .thumb

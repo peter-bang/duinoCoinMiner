@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2"
-  "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2"
-  "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2"
-  "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/tmp"
-  "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src/ELF2UF2Build-stamp"
-  "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src"
-  "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src/ELF2UF2Build-stamp"
+  "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/tools/elf2uf2"
+  "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/elf2uf2"
+  "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2"
+  "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/tmp"
+  "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src/ELF2UF2Build-stamp"
+  "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src"
+  "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src/ELF2UF2Build-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src/ELF2UF2Build-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src/ELF2UF2Build-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src/ELF2UF2Build-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build/minerSlave/elf2uf2/src/ELF2UF2Build-stamp${cfgdir}") # cfgdir has leading slash
 endif()

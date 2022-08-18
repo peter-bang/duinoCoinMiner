@@ -11,7 +11,7 @@ include(pico_sdk_import.cmake)
 #Set Project Name
 set(PROJECT_NAME duinoCoinMiner)
 
-project(test_project C CXX ASM)
+project(duinoCoinMiner C CXX ASM)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)

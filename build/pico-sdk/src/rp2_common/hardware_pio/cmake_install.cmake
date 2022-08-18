@@ -1,4 +1,4 @@
-# Install script for directory: /Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/hardware_pio
+# Install script for directory: /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/hardware_pio
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

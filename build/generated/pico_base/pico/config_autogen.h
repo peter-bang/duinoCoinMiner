@@ -4,8 +4,8 @@
 
 // based on PICO_CONFIG_HEADER_FILES:
 
-#include "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/boards/include/boards/pico.h"
+#include "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/boards/include/boards/pico.h"
 
 // based on PICO_RP2040_CONFIG_HEADER_FILES:
 
-#include "/Volumes/외장하드/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h"
+#include "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis/include/cmsis/rename_exceptions.h"
