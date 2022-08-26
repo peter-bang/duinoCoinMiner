@@ -1602,6 +1602,18 @@
 			"value" : "OFF"
 		},
 		{
+			"name" : "FAMILY_MCUS",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : ""
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "RP2040"
+		},
+		{
 			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_Perl",
 			"properties" : 
 			[
@@ -1855,7 +1867,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : " /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs"
+			"value" : " /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common/cmsis /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040/hardware_regs"
 		},
 		{
 			"name" : "PICO_DOXYGEN_PATHS",
@@ -1867,7 +1879,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : " /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/common /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040"
+			"value" : " /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/common /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/lib/cyw43-driver/src /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2_common /Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk/src/rp2040"
 		},
 		{
 			"name" : "PICO_NO_FLASH",
@@ -2252,42 +2264,6 @@
 			],
 			"type" : "STATIC",
 			"value" : "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/libraries/pico-sdk"
-		},
-		{
-			"name" : "test_project_BINARY_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner/build"
-		},
-		{
-			"name" : "test_project_IS_TOP_LEVEL",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "test_project_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/Volumes/ExtSSD/workspace/rpi-pico/duinoCoinMiner"
 		}
 	],
 	"kind" : "cache",

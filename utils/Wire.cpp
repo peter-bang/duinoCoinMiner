@@ -66,7 +66,11 @@ uint8_t TwoWire::endTransmission(bool sendStop) {
     assert(txAddress_ != NO_ADDRESS); // must follow beginTransmission()
     assert(bufPos_ == 0);
 
-    int result = i2c_write_blocking(i2c(), txAddress_, buf_, bufLen_, !sendStop);
+    absolute_time_t i2c_timeout;
+    i2c_timeout = get_absolute_time();
+    i2c_timeout._private_us_since_boot = i2c_timeout._private_us_since_boot + 100000;
+
+    int result = i2c_write_blocking_until(i2c(), txAddress_, buf_, bufLen_, !sendStop, i2c_timeout);
     txAddress_ = NO_ADDRESS;
     bufLen_ = 0;
     if (result < 0) {
@@ -81,9 +85,12 @@ uint8_t TwoWire::endTransmission(bool sendStop) {
 uint8_t TwoWire::requestFrom(uint8_t address, size_t count, bool sendStop) {
     assert(mode_ == Master); // not allowed for slave
     assert(txAddress_ == NO_ADDRESS); // not allowed during transmission
-
     count = MIN(count, WIRE_BUFFER_LENGTH);
-    int result = i2c_read_blocking(i2c(), address, buf_, count, !sendStop);
+    absolute_time_t i2c_timeout;
+    i2c_timeout = get_absolute_time();
+    i2c_timeout._private_us_since_boot = i2c_timeout._private_us_since_boot + 100000;
+    int result = i2c_read_blocking_until(i2c(), address, buf_, count, !sendStop, i2c_timeout);
+    // int result = i2c_read_blocking(i2c(), address, buf_, count, !sendStop);
     if (result < 0) {
         result = 0;
     }

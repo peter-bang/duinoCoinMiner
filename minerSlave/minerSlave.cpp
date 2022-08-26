@@ -30,52 +30,56 @@ uint8_t TempBufferCore1[256];
 void slaveLoopCore1() {
     while(1){
         if(Core1Trigger && !receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1){
-            memset(TempBufferCore1,0,256);
-            HashCalStatusCore1 = HASH_BUSY;
-            uint32_t startTime = 0;
-            uint32_t endTime = 0;
-            uint32_t elapsed_time = 0;
-            
-            uint8_t jobnumber[32] = "";// this should be number between 0 to 99
-            uint8_t lastblockhash[64] = "";
-            uint8_t newblockhash[64] = "";
-            uint8_t tempDifficulty[8] = "";
+            if(receiveBuffer.length() == 256) {
+                receiveBuffer.clear();
+            } else {
+                memset(TempBufferCore1,0,256);
+                HashCalStatusCore1 = HASH_BUSY;
+                uint32_t startTime = 0;
+                uint32_t endTime = 0;
+                uint32_t elapsed_time = 0;
+                
+                uint8_t jobnumber[32] = "";// this should be number between 0 to 99
+                uint8_t lastblockhash[64] = "";
+                uint8_t newblockhash[64] = "";
+                uint8_t tempDifficulty[8] = "";
 
 
-            uint32_t difficulty = 0;
-            uint32_t jobNumber = 0;
+                uint32_t difficulty = 0;
+                uint32_t jobNumber = 0;
 
-            printf("slaveloopCore1:!!! %s", receiveBuffer.buf());
-            receiveBuffer.readStringUntil(',',(char *)jobnumber);
-            receiveBuffer.readStringUntil(',',(char *)lastblockhash);
-            receiveBuffer.readStringUntil(',',(char *)newblockhash);
-            receiveBuffer.readStringUntil('\n', (char *)tempDifficulty);
-            difficulty = atoi((char *)tempDifficulty);
-            jobNumber = atoi((char *)jobnumber);
+                printf("slaveloopCore1:!!! %s", receiveBuffer.buf());
+                receiveBuffer.readStringUntil(',',(char *)jobnumber);
+                receiveBuffer.readStringUntil(',',(char *)lastblockhash);
+                receiveBuffer.readStringUntil(',',(char *)newblockhash);
+                receiveBuffer.readStringUntil('\n', (char *)tempDifficulty);
+                difficulty = atoi((char *)tempDifficulty);
+                jobNumber = atoi((char *)jobnumber);
 
-            if(jobNumber == 0 || difficulty == 0 || strlen((char *)lastblockhash) == 0 || strlen((char *)newblockhash) == 0){
-                printf("From Core1: Something wrong with the data from the master.\n");
-                HashCalStatusCore1 = HASH_IDLE;
-                return;
+                if(jobNumber == 0 || difficulty == 0 || strlen((char *)lastblockhash) == 0 || strlen((char *)newblockhash) == 0){
+                    printf("From Core1: Something wrong with the data from the master.\n");
+                    HashCalStatusCore1 = HASH_IDLE;
+                    return;
+                }
+
+                printf("From Core1: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
+                
+                startTime = time_us_32();
+                //while hash calculation on core 0, it's not able to assign a hash job to core 1.
+                uint32_t result = calculateHashCore1(lastblockhash, newblockhash, difficulty);
+                endTime = time_us_32();
+                
+                elapsed_time = endTime - startTime;//us
+                // printf("Core1: endTime: %d, startTime: %d\n",endTime,startTime);
+                //hash rate needs to be calculated.
+                //Update Buffer
+                //만들자,
+                sprintf((char *)TempBufferCore1,"%d,%d,%d\n",jobNumber, result, elapsed_time);
+                // sprintf((char *)TempBufferCore0,"%s,%s,%s\n", jobnumber, result, elapsed_time);
+                // uint32_t result = 0;
+                printf("Form Core1: The hash result is %d\n",TempBufferCore1);
+                HashCalStatusCore1 = HASH_DONE;
             }
-
-            printf("From Core1: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
-            
-            startTime = time_us_32();
-            //while hash calculation on core 0, it's not able to assign a hash job to core 1.
-            uint32_t result = calculateHashCore1(lastblockhash, newblockhash, difficulty);
-            endTime = time_us_32();
-            
-            elapsed_time = endTime - startTime;//us
-            // printf("Core1: endTime: %d, startTime: %d\n",endTime,startTime);
-            //hash rate needs to be calculated.
-            //Update Buffer
-            //만들자,
-            sprintf((char *)TempBufferCore1,"%d,%d,%d\n",jobNumber, result, elapsed_time);
-            // sprintf((char *)TempBufferCore0,"%s,%s,%s\n", jobnumber, result, elapsed_time);
-            // uint32_t result = 0;
-            printf("Form Core1: The hash result is %d\n",TempBufferCore1);
-            HashCalStatusCore1 = HASH_DONE;
         }
     }
 }
@@ -92,7 +96,7 @@ static void slave_on_receive(int count) {
     uint8_t command;
     hard_assert(Wire1.available());
     command = (uint8_t)Wire1.read();//first byte is command.
-
+    printf("command:%02x\n",command);
     switch (command){
     case 0x00: //read if it's available?
         /* code */
@@ -143,6 +147,9 @@ static void slave_on_receive(int count) {
         break;
 
     default:
+        while (Wire1.available()) { //clear the receive buffer
+            Wire1.read();
+        }
         break;
     }
 }
@@ -150,6 +157,7 @@ static void slave_on_receive(int count) {
 static void slaveLoop() {
     if(Core1Trigger == 0 && !receiveBuffer.isEmpty() && receiveBuffer.indexOf('\n') != -1)
     {
+            if(receiveBuffer.length() == 256) {receiveBuffer.clear();}
             memset(TempBufferCore0,0,256);
             HashCalStatusCore0 = HASH_BUSY;
             uint32_t startTime = 0;
@@ -182,7 +190,7 @@ static void slaveLoop() {
             printf("From Core0: Last block hash is %s\nNew block hash is %s\nDifficulty is %d\n", lastblockhash, newblockhash, difficulty);
             
             startTime = time_us_32();
-            //while hash calculation on core 0, it's not able to assign a hash job to core 1.
+            //while hash calcuion on core 0, it's not able to assign a hash job to core 1.
             uint32_t result = calculateHashCore0(lastblockhash, newblockhash, difficulty);
             endTime = time_us_32();
             

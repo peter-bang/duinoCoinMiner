@@ -19,6 +19,7 @@ extern "C" {
 
 //on board led pin number
 #define LED_PIN 25
+#define LED_PIN_OUT 20
 
 //address pin number
 #define I2C_SLAVE_ADDRESS_PIN0 16
@@ -27,7 +28,7 @@ extern "C" {
 #define I2C_SLAVE_ADDRESS_PIN3 19
 
 
-#define DEFAULT_SLAVE_ADDRESS 0x70
+#define DEFAULT_SLAVE_ADDRESS 0x50
 
 //hardware setup
 void hardwareInit();
@@ -35,10 +36,16 @@ void hardwareInit();
 
 //utils
 uint8_t getAddress();
+
+//for the on board led
 void onBoardLedToggle();
 void onBoardLedOff();
 void onBoardLedOn();
 
+//for the outside led
+void outsideLedToggle();
+void  outsideLedOn();
+void outsideLedOff();
 
 #ifdef __cplusplus
 }

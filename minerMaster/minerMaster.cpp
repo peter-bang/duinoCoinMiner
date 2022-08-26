@@ -43,7 +43,7 @@ int main() {
     onBoardLedOn();
     
     //initial delay
-    sleep_ms(1000);
+    sleep_ms(2000);
     
     Wire1.begin();
 
@@ -67,7 +67,6 @@ int main() {
             uint8_t core0 = receiveBuffer.read();
             uint8_t core1 = receiveBuffer.read();
             receiveBuffer.clear();
-
             if(core0 == '0' || core1 =='0'){//HASH_IDLE
                 //get the job from the duino coin server
                 uint8_t socketNumber = rand()%99;
@@ -89,6 +88,7 @@ int main() {
                 receiveBuffer.clear();
             }
         }
+        sleep_ms(1000);
         onBoardLedToggle();
     }
 }
@@ -97,11 +97,16 @@ uint32_t busScan(uint8_t * slaveAddressArray){
     uint8_t slaveCount = 0;
     int8_t ret = 0;
     uint8_t dummy;
-    for(int addr = 100 ; addr < (1 << 7); ++addr){
+    for(int addr = 0 ; addr < (1 << 7); ++addr){
         if (reserved_addr(addr))
-            ret = PICO_ERROR_GENERIC;
+            {
+                ret = PICO_ERROR_GENERIC;
+            }
         else{
-            ret = i2c_read_blocking(i2c1, addr, &dummy, 1, false);
+            absolute_time_t i2c_timeout;
+            i2c_timeout = get_absolute_time();
+            i2c_timeout._private_us_since_boot += 100000;
+            ret = i2c_read_blocking_until(i2c1, addr, &dummy, 1, true,i2c_timeout);
         }
         if(ret > 0){
             slaveAddressArray[slaveCount++] = addr;

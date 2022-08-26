@@ -45,7 +45,7 @@
 				"libraries/mbedtls/library/libmbedcrypto.a"
 			],
 			"targetId" : "mbedcrypto::@5057db8c34de054eb6c6",
-			"targetIndex" : 6,
+			"targetIndex" : 9,
 			"type" : "target"
 		},
 		{
@@ -57,7 +57,7 @@
 				"libraries/mbedtls/library/libmbedx509.a"
 			],
 			"targetId" : "mbedx509::@5057db8c34de054eb6c6",
-			"targetIndex" : 8,
+			"targetIndex" : 11,
 			"type" : "target"
 		},
 		{
@@ -69,7 +69,7 @@
 				"libraries/mbedtls/library/libmbedtls.a"
 			],
 			"targetId" : "mbedtls::@5057db8c34de054eb6c6",
-			"targetIndex" : 7,
+			"targetIndex" : 10,
 			"type" : "target"
 		}
 	],

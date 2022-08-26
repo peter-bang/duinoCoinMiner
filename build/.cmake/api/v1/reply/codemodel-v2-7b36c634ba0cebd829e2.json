@@ -581,9 +581,9 @@
 					"source" : "libraries/pico-sdk/src/rp2_common/boot_stage2",
 					"targetIndexes" : 
 					[
-						2,
 						3,
-						4
+						4,
+						5
 					]
 				},
 				{
@@ -782,7 +782,13 @@
 					},
 					"parentIndex" : 16,
 					"projectIndex" : 1,
-					"source" : "libraries/pico-sdk/src/rp2_common/cyw43_driver"
+					"source" : "libraries/pico-sdk/src/rp2_common/cyw43_driver",
+					"targetIndexes" : 
+					[
+						1,
+						6,
+						7
+					]
 				},
 				{
 					"build" : "pico-sdk/src/rp2_common/pico_lwip",
@@ -960,7 +966,7 @@
 					"targetIndexes" : 
 					[
 						0,
-						10
+						13
 					]
 				},
 				{
@@ -975,7 +981,7 @@
 					"source" : "minerMaster",
 					"targetIndexes" : 
 					[
-						9
+						12
 					]
 				},
 				{
@@ -1008,7 +1014,7 @@
 					"source" : "libraries/mbedtls",
 					"targetIndexes" : 
 					[
-						1
+						2
 					]
 				},
 				{
@@ -1037,7 +1043,7 @@
 				{
 					"build" : "libraries/mbedtls/library",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-libraries.mbedtls.library-Debug-ee9e85b7c9cf6ac54877.json",
+					"jsonFile" : "directory-libraries.mbedtls.library-Debug-c831dded31d45b649f5a.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.5.1"
@@ -1047,10 +1053,10 @@
 					"source" : "libraries/mbedtls/library",
 					"targetIndexes" : 
 					[
-						5,
-						6,
-						7,
-						8
+						8,
+						9,
+						10,
+						11
 					]
 				},
 				{
@@ -1088,8 +1094,8 @@
 					"targetIndexes" : 
 					[
 						0,
-						9,
-						10
+						12,
+						13
 					]
 				},
 				{
@@ -1173,9 +1179,12 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						2,
+						1,
 						3,
-						4
+						4,
+						5,
+						6,
+						7
 					]
 				},
 				{
@@ -1190,11 +1199,11 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						1,
-						5,
-						6,
-						7,
-						8
+						2,
+						8,
+						9,
+						10,
+						11
 					]
 				}
 			],
@@ -1203,9 +1212,16 @@
 				{
 					"directoryIndex" : 76,
 					"id" : "ELF2UF2Build::@973896d035f4144ec770",
-					"jsonFile" : "target-ELF2UF2Build-Debug-892b6579f61784ca5848.json",
+					"jsonFile" : "target-ELF2UF2Build-Debug-b8cfb3be92dd488df7e6.json",
 					"name" : "ELF2UF2Build",
 					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 61,
+					"id" : "PioasmBuild::@29db30da11e86cddb3e0",
+					"jsonFile" : "target-PioasmBuild-Debug-4b0774da9c6bd4539f40.json",
+					"name" : "PioasmBuild",
+					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 79,
@@ -1233,6 +1249,20 @@
 					"id" : "bs2_default_padded_checksummed_asm::@bc554eaed616d198a22d",
 					"jsonFile" : "target-bs2_default_padded_checksummed_asm-Debug-fe2ba607ef782aa1ace9.json",
 					"name" : "bs2_default_padded_checksummed_asm",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 61,
+					"id" : "cyw43_driver_picow_cyw43_bus_pio_spi_pio_h::@29db30da11e86cddb3e0",
+					"jsonFile" : "target-cyw43_driver_picow_cyw43_bus_pio_spi_pio_h-Debug-a86736662eac35f98173.json",
+					"name" : "cyw43_driver_picow_cyw43_bus_pio_spi_pio_h",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 61,
+					"id" : "cyw43_firmware_package::@29db30da11e86cddb3e0",
+					"jsonFile" : "target-cyw43_firmware_package-Debug-2ea852bab1358e6fa83c.json",
+					"name" : "cyw43_firmware_package",
 					"projectIndex" : 1
 				},
 				{
@@ -1273,7 +1303,7 @@
 				{
 					"directoryIndex" : 76,
 					"id" : "minerSlave::@973896d035f4144ec770",
-					"jsonFile" : "target-minerSlave-Debug-02bf4fa8fe7e5f8c7613.json",
+					"jsonFile" : "target-minerSlave-Debug-ba1ef3ddebd2dfc3013b.json",
 					"name" : "minerSlave",
 					"projectIndex" : 0
 				}

@@ -35,6 +35,10 @@ void hardwareInit(){
     //gpio setup for LED
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
+
+    //gpio setup for LED outside the board
+    gpio_init(LED_PIN_OUT);
+    gpio_set_dir(LED_PIN_OUT,GPIO_OUT);
 }
 
 uint8_t getAddress(){
@@ -59,4 +63,16 @@ void onBoardLedOff(){
 
 void onBoardLedOn(){
     gpio_put(LED_PIN, 1);
+}
+
+void outsideLedToggle(){
+    gpio_put(LED_PIN_OUT, !gpio_get(LED_PIN_OUT));
+}
+
+void  outsideLedOn(){
+    gpio_put(LED_PIN_OUT, 0);//pin low to turn on the led
+}
+
+void outsideLedOff(){
+    gpio_put(LED_PIN_OUT, 1);//pin high to turn off the led
 }

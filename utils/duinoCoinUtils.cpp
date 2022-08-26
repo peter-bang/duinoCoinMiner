@@ -69,10 +69,10 @@ uint32_t calculateHashCore0(uint8_t * last_block_hash_str, uint8_t * expected_ha
         if ( ret = mbedtls_sha1_finish_ret(&core0_sha1_ctx, hash_result) != 0 )
             printf("Failed mbedtls_sha1_finish_ret = %d\r\n", ret);
 
-        if(hash_number % 1000 == 0) {onBoardLedToggle();}
+        if(hash_number % 1000 == 0) {outsideLedToggle();}
         //if expected_hash_array equals to the hash result, job is done.
         if(!(memcmp(expected_hash_arry, hash_result, 20)))
-        {
+        {   
             for (int i = 0 ; i < 20; i++)
             printf("%02x ",hash_result[i]);
             printf("\n");
